@@ -44,6 +44,38 @@ $(DEFAULT_GOAL): droid_targets
 .PHONY: droid_targets
 droid_targets:
 
+<<<<<<< HEAD
+=======
+# Used to force goals to build.  Only use for conditionally defined goals.
+.PHONY: FORCE
+FORCE:
+
+# These goals don't need to collect and include Android.mks/CleanSpec.mks
+# in the source tree.
+dont_bother_goals := clean clobber dataclean installclean \
+    help out \
+    snod systemimage-nodeps \
+    stnod systemtarball-nodeps \
+    userdataimage-nodeps userdatatarball-nodeps \
+    cacheimage-nodeps \
+    vendorimage-nodeps \
+    systemotherimage-nodeps \
+    ramdisk-nodeps \
+    bootimage-nodeps \
+    recoveryimage-nodeps \
+    product-graph dump-products \
+    burst novo surgical biopsy
+
+ifneq ($(filter $(dont_bother_goals), $(MAKECMDGOALS)),)
+dont_bother := true
+endif
+
+ORIGINAL_MAKECMDGOALS := $(MAKECMDGOALS)
+
+# Targets that provide quick help on the build system.
+include $(BUILD_SYSTEM)/help.mk
+
+>>>>>>> c7efc9adb... DHO's cleaning rules
 # Set up various standard variables based on configuration
 # and host information.
 include $(BUILD_SYSTEM)/config.mk
@@ -1161,6 +1193,47 @@ endif  # samplecode in $(MAKECMDGOALS)
 
 .PHONY: findbugs
 findbugs: $(INTERNAL_FINDBUGS_HTML_TARGET) $(INTERNAL_FINDBUGS_XML_TARGET)
+
+.PHONY: clean
+clean:
+	@rm -rf $(OUT_DIR)/*
+	@echo -e ${CL_GRN}"Entire build directory removed."${CL_RST}
+
+.PHONY: clobber
+clobber: clean
+
+# This should be almost as good as a clobber but keeping many of the time intensive files - DHO
+.PHONY: novo
+novo:
+	@rm -rf $(OUT_DIR)/target/*
+	@echo -e ${CL_GRN}"Target directory removed."${CL_RST}
+
+# This is designed for building in memory.  Clean products, but keep common files - DHO
+.PHONY: burst
+burst:
+	@rm -rf $(OUT_DIR)/target/product/*
+	@echo -e ${CL_GRN}"Product directory removed."${CL_RST}
+
+# This is designed for building in memory + keeping smaller build folders + common files - DHO
+.PHONY: surgical
+surgical:
+	@rm -rf $(OUT_DIR)/target/product/*/obj/
+	@rm -rf $(OUT_DIR)/target/product/*/symbols/
+	@rm -rf $(OUT_DIR)/target/product/*/du_*-ota-eng.$(USER).zip
+	@rm -rf $(OUT_DIR)/target/product/*/system.img
+	@rm -rf $(OUT_DIR)/target/product/*/userdata.img
+	@echo -e ${CL_GRN}"Surgical Strike Completed."${CL_RST}
+
+# This is designed for building on SSD but to whittle away at the bulk file size - DHO
+.PHONY: biopsy
+biopsy:
+	@rm -rf $(OUT_DIR)/target/product/*/du_*-ota-eng.$(USER).zip
+	@rm -rf $(OUT_DIR)/target/product/*/system.img
+	@rm -rf $(OUT_DIR)/target/product/*/userdata.img
+	@rm -rf $(OUT_DIR)/target/product/*/system/app/*
+	@echo -e ${CL_GRN}"Surgical Strike Completed."${CL_RST}
+
+# The rules for dataclean and installclean are defined in cleanbuild.mk.
 
 #xxx scrape this from ALL_MODULE_NAME_TAGS
 .PHONY: modules
