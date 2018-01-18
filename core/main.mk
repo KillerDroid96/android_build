@@ -44,8 +44,6 @@ $(DEFAULT_GOAL): droid_targets
 .PHONY: droid_targets
 droid_targets:
 
-<<<<<<< HEAD
-=======
 # Used to force goals to build.  Only use for conditionally defined goals.
 .PHONY: FORCE
 FORCE:
@@ -75,7 +73,6 @@ ORIGINAL_MAKECMDGOALS := $(MAKECMDGOALS)
 # Targets that provide quick help on the build system.
 include $(BUILD_SYSTEM)/help.mk
 
->>>>>>> c7efc9adb... DHO's cleaning rules
 # Set up various standard variables based on configuration
 # and host information.
 include $(BUILD_SYSTEM)/config.mk
