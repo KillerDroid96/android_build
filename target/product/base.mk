@@ -135,7 +135,8 @@ PRODUCT_PACKAGES += \
     vold \
     wm \
     ResurrectionOTA \
-    AICP_OTA
+    AICP_OTA \
+    crDroidOTA
 
 # Essential HAL modules
 PRODUCT_PACKAGES += \
