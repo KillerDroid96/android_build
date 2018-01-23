@@ -133,7 +133,8 @@ PRODUCT_PACKAGES += \
     telecom \
     vdc \
     vold \
-    wm
+    wm \
+    ResurrectionOTA
 
 # Essential HAL modules
 PRODUCT_PACKAGES += \
