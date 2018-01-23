@@ -134,7 +134,8 @@ PRODUCT_PACKAGES += \
     vdc \
     vold \
     wm \
-    ResurrectionOTA
+    ResurrectionOTA \
+    AICP_OTA
 
 # Essential HAL modules
 PRODUCT_PACKAGES += \
