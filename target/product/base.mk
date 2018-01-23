@@ -134,10 +134,8 @@ PRODUCT_PACKAGES += \
     vdc \
     vold \
     wm \
-    ResurrectionOTA \
-    AICP_OTA \
-    crDroidOTA
-
+    ResurrectionOTA
+    
 # Essential HAL modules
 PRODUCT_PACKAGES += \
     android.hardware.cas@1.0-service \
