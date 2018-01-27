@@ -475,20 +475,19 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   # Dump fingerprints
   # script.Print("Target: %s" % target_fp)
   script.Print(" ")
-  script.Print("        || THANK YOU FOR FLASHING ||        ");
+  script.Print("        || THANK YOU FOR FLASHING ||       ");
   script.Print(" ")
-  script.Print("          _____   _                          ");
-  script.Print("         (____ \ (_)      _                  ");
-  script.Print("          _   \ \ _  ____| |_ _   _          ");
-  script.Print("         | |   | | |/ ___)  _) | | |         ");
-  script.Print("         | |__/ /| | |   | |_| |_| |         ");
-  script.Print("         |_____/ |_|_|    \___)__  |         ");
-  script.Print(" _     _       _             (____/          ");
-  script.Print("| |   | |     (_)                            ");
-  script.Print("| |   | |____  _  ____ ___   ____ ____   ___ ");
-  script.Print("| |   | |  _ \| |/ ___) _ \ / ___)  _ \ /___)");
-  script.Print("| |___| | | | | ( (__| |_| | |   | | | |___ |");
-  script.Print(" \______|_| |_|_|\____)___/|_|   |_| |_(___/ ");
+  script.Print("             ____  _      __               ");
+  script.Print("            / __ \(_)____/ /___  __        ");
+  script.Print("           / / / / / ___/ __/ / / /        ");
+  script.Print("          / /_/ / / /  / /_/ /_/ /         ");
+  script.Print("         /_____/_/_/   \__/\__, /          ");
+  script.Print("   __  __      _          /____/           ");
+  script.Print("  / / / /___  (_)________  _________  _____");
+  script.Print(" / / / / __ \/ / ___/ __ \/ ___/ __ \/ ___/");
+  script.Print("/ /_/ / / / / / /__/ /_/ / /  / / / (__  ) ");
+  script.Print("\____/_/ /_/_/\___/\____/_/  /_/ /_/____/  ");
+  script.Print("                                           ");  
   script.Print(" ")
 
   if GetBuildProp("ro.mod.version", OPTIONS.info_dict) is not None:
@@ -503,15 +502,21 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     device = GetBuildProp("ro.product.name", OPTIONS.info_dict)
     codename = GetBuildProp("ro.vendor.product.device", OPTIONS.info_dict)
     density = GetBuildProp("ro.sf.lcd_density", OPTIONS.info_dict)
+    
+    kernel = ("/home/matt/ROMs/DU/out/target/product/dumpling/obj/KERNEL_OBJ/include/config/kernel.release")
+    kernelver = open(kernel).read()
+
     script.Print(" =============================================");
     script.Print(" ROM Version    : %s"%(buildid));          
     script.Print("");
-    script.Print(" Build Version  : %s"%(androidver)); 
+    script.Print(" Build Version  : %s"%(androidver));
+    script.Print("");
+    script.Print(" Kernel Version : %s"%(kernelver)); 
     script.Print("");
     script.Print(" Security Patch : %s"%(securep));  
     script.Print("");
-    script.Print(" Build Date     : %s"%(buildday));     
-    script.Print("");
+    script.Print(" Build Date     : %s"%(buildday));
+    script.Print(" =============================================");
     script.Print(" Build Type     : %s"%(buildtype));    
     script.Print("");
     script.Print(" Build Host     : %s"%(buildhst));     
@@ -577,27 +582,6 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   common.CheckSize(boot_img.data, "boot.img", OPTIONS.info_dict)
   common.ZipWriteStr(output_zip, "boot.img", boot_img.data)
 
-  script.Print( " ");
-  script.Print( " ");
-  script.Print( "            ________    ___   _____ __  __   ");
-  script.Print( "           / ____/ /   /   | / ___// / / /   ");
-  script.Print( "          / /_  / /   / /| | \__ \/ /_/ /    ");
-  script.Print( "         / __/ / /___/ ___ |___/ / __  /     ");
-  script.Print( "        /_/   /_____/_/  |_/____/_/ /_/      ");
-  script.Print( "       __ __ __________  _   __________      ");
-  script.Print( "      / //_// ____/ __ \/ | / / ____/ /      ");
-  script.Print( "     / ,<  / __/ / /_/ /  |/ / __/ / /       ");
-  script.Print( "    / /| |/ /___/ _, _/ /|  / /___/ /___     ");
-  script.Print( "   /_/ |_/_____/_/ |_/_/ |_/_____/_____/     ");
-  script.Print(" =============================================");
-  script.Print( " ");
-  script.Print( " ");
-  
-  if GetBuildProp("ro.mod.version", OPTIONS.info_dict) is not None:
-    kernelid = GetBuildProp("cat ${OUT_DIR}/include/config/kernel.release", OPTIONS.info_dict)
-  script.Print(" =============================================");
-  script.Print(" Kernel Version    : %s"%(kernelid));          
-  script.Print(" =============================================");
   script.Print( " ");
   script.Print( " ");
   script.Print( "Flashing Kernel...");
