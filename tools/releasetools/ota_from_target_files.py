@@ -474,9 +474,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
   # Dump fingerprints
   # script.Print("Target: %s" % target_fp)
-  script.Print(" ")
-  script.Print("        || THANK YOU FOR FLASHING ||       ");
-  script.Print(" ")
+  script.Print("                                           ");
   script.Print("             ____  _      __               ");
   script.Print("            / __ \(_)____/ /___  __        ");
   script.Print("           / / / / / ___/ __/ / / /        ");
@@ -488,8 +486,6 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.Print("/ /_/ / / / / / /__/ /_/ / /  / / / (__  ) ");
   script.Print("\____/_/ /_/_/\___/\____/_/  /_/ /_/____/  ");
   script.Print("                                           ");  
-  script.Print(" ")
-
   if GetBuildProp("ro.mod.version", OPTIONS.info_dict) is not None:
     buildid = GetBuildProp("ro.mod.version", OPTIONS.info_dict)
     androidver = GetBuildProp("ro.build.version.release", OPTIONS.info_dict)
@@ -502,10 +498,8 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     device = GetBuildProp("ro.product.name", OPTIONS.info_dict)
     codename = GetBuildProp("ro.vendor.product.device", OPTIONS.info_dict)
     density = GetBuildProp("ro.sf.lcd_density", OPTIONS.info_dict)
-    
     kernel = ("/home/matt/ROMs/DU/out/target/product/dumpling/obj/KERNEL_OBJ/include/config/kernel.release")
-    kernelver = open(kernel).read()
-
+    kernelver = open(kernel).read(
     script.Print(" =============================================");
     script.Print(" ROM Version    : %s"%(buildid));
     script.Print(" Kernel Version : %s"%(kernelver)); 
