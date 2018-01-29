@@ -507,26 +507,18 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     kernelver = open(kernel).read()
 
     script.Print(" =============================================");
+    script.Print(" ROM Version    : %s"%(buildid));
     script.Print(" Kernel Version : %s"%(kernelver)); 
-    script.Print("");
-    script.Print(" ROM Version    : %s"%(buildid));          
-    script.Print("");
     script.Print(" OS Version     : %s"%(androidver));
-    script.Print("");
     script.Print(" Security Patch : %s"%(securep));  
-    script.Print("");
     script.Print(" Build Date     : %s"%(buildday));
     script.Print(" =============================================");
     script.Print(" Build Type     : %s"%(buildtype));    
-    script.Print("");
     script.Print(" Build Host     : %s"%(buildhst));     
-    script.Print("");
     script.Print(" Maintainer     : %s"%(maintainer));   
     script.Print(" =============================================");
     script.Print(" Device         : %s"%(device));           
-    script.Print("");
     script.Print(" Codename       : %s"%(codename));       
-    script.Print("");
     script.Print(" LCD Density    : %s"%(density));   
     script.Print(" =============================================");
     
