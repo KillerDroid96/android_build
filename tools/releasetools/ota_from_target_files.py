@@ -474,27 +474,18 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
   # Dump fingerprints
   # script.Print("Target: %s" % target_fp)
-  script.Print(" ")
-  script.Print("        || THANK YOU FOR FLASHING ||        ");
-  script.Print(" ")
-  script.Print(" DDDDDDDDDDDDD         UUUUUUUU     UUUUUUUU ");
-  script.Print(" D::::::::::::DDD      U::::::U     U::::::U ");
-  script.Print(" D:::::::::::::::DD    U::::::U     U::::::U ");
-  script.Print(" DDD:::::DDDDD:::::D   UU:::::U     U:::::UU ");
-  script.Print("   D:::::D    D:::::D   U:::::U     U:::::U  ");
-  script.Print("   D:::::D     D:::::D  U:::::U     U:::::U  ");
-  script.Print("   D:::::D     D:::::D  U:::::U     U:::::U  ");
-  script.Print("   D:::::D     D:::::D  U:::::U     U:::::U  ");
-  script.Print("   D:::::D     D:::::D  U:::::U     U:::::U  ");
-  script.Print("   D:::::D     D:::::D  U:::::U     U:::::U  ");
-  script.Print("   D:::::D     D:::::D  U:::::U     U:::::U  ");
-  script.Print("   D:::::D    D:::::D   U::::::U   U::::::U  ");
-  script.Print(" DDD:::::DDDDD:::::D    U:::::::UUU:::::::U  ");
-  script.Print(" D:::::::::::::::DD      UU:::::::::::::UU   ");
-  script.Print(" D::::::::::::DDD          UU:::::::::UU     ");
-  script.Print(" DDDDDDDDDDDDD               UUUUUUUUU       ");
-  script.Print(" ")
-
+  script.Print("                                           ");
+  script.Print("             ____  _      __               ");
+  script.Print("            / __ \(_)____/ /___  __        ");
+  script.Print("           / / / / / ___/ __/ / / /        ");
+  script.Print("          / /_/ / / /  / /_/ /_/ /         ");
+  script.Print("         /_____/_/_/   \__/\__, /          ");
+  script.Print("   __  __      _          /____/           ");
+  script.Print("  / / / /___  (_)________  _________  _____");
+  script.Print(" / / / / __ \/ / ___/ __ \/ ___/ __ \/ ___/");
+  script.Print("/ /_/ / / / / / /__/ /_/ / /  / / / (__  ) ");
+  script.Print("\____/_/ /_/_/\___/\____/_/  /_/ /_/____/  ");
+  script.Print("                                           ");  
   if GetBuildProp("ro.mod.version", OPTIONS.info_dict) is not None:
     buildid = GetBuildProp("ro.mod.version", OPTIONS.info_dict)
     androidver = GetBuildProp("ro.build.version.release", OPTIONS.info_dict)
@@ -502,22 +493,29 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     buildidn = GetBuildProp("ro.build.id", OPTIONS.info_dict)
     buildday = GetBuildProp("ro.build.date", OPTIONS.info_dict)
     securep = GetBuildProp("ro.build.version.security_patch", OPTIONS.info_dict)
+    buildhst = GetBuildProp("ro.build.host", OPTIONS.info_dict)
+    maintainer = GetBuildProp("ro.build.user", OPTIONS.info_dict)
     device = GetBuildProp("ro.product.name", OPTIONS.info_dict)
+    codename = GetBuildProp("ro.vendor.product.device", OPTIONS.info_dict)
+    density = GetBuildProp("ro.sf.lcd_density", OPTIONS.info_dict)
+    kernel = ("/home/matt/ROMs/DU/out/target/product/dumpling/obj/KERNEL_OBJ/include/config/kernel.release")
+    kernelver = open(kernel).read(
     script.Print(" =============================================");
-    script.Print(" ROM version    : %s"%(buildid));
-    script.Print("");
-    script.Print(" Android version  : %s"%(androidver));
-    script.Print("");
-    script.Print(" Security patch : %s"%(securep));
-    script.Print("");
-    script.Print(" Build date     : %s"%(buildday));
-    script.Print("");
-    script.Print(" Build type     : %s"%(buildtype));
-    script.Print("");
+    script.Print(" ROM Version    : %s"%(buildid));
+    script.Print(" Kernel Version : %s"%(kernelver)); 
+    script.Print(" OS Version     : %s"%(androidver));
+    script.Print(" Security Patch : %s"%(securep));  
+    script.Print(" Build Date     : %s"%(buildday));
     script.Print(" =============================================");
-    script.Print(" Device         : %s"%(device));
+    script.Print(" Build Type     : %s"%(buildtype));    
+    script.Print(" Build Host     : %s"%(buildhst));     
+    script.Print(" Maintainer     : %s"%(maintainer));   
     script.Print(" =============================================");
-
+    script.Print(" Device         : %s"%(device));           
+    script.Print(" Codename       : %s"%(codename));       
+    script.Print(" LCD Density    : %s"%(density));   
+    script.Print(" =============================================");
+      
   script.AppendExtra("ifelse(is_mounted(\"/system\"), unmount(\"/system\"));")
   device_specific.FullOTA_InstallBegin()
 
