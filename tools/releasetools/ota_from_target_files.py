@@ -580,18 +580,18 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.Print( "     / ,<  / __/ / /_/ /  |/ / __/ / /       ");
   script.Print( "    / /| |/ /___/ _, _/ /|  / /___/ /___     ");
   script.Print( "   /_/ |_/_____/_/ |_/_/ |_/_____/_____/     ");
-  script.Print(" =============================================");
+  script.Print( " ============================================= ");
   script.Print( " ");
   script.Print( " ");
   
   if GetBuildProp("ro.mod.version", OPTIONS.info_dict) is not None:
     kernelid = GetBuildProp("cat ${OUT_DIR}/include/config/kernel.release", OPTIONS.info_dict)
-  script.Print(" =============================================");
+  script.Print(" ============================================= ");
   script.Print(" Kernel Version    : %s"%(kernelid));          
-  script.Print(" =============================================");
+  script.Print(" ============================================= ");
   script.Print( " ");
   script.Print( " ");
-  script.Print( "Flashing Kernel...");
+  script.Print( " Flashing Kernel... ");
   script.Print( " ");
   script.Print( " ");
   
