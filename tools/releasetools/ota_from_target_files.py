@@ -498,8 +498,9 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     device = GetBuildProp("ro.product.name", OPTIONS.info_dict)
     codename = GetBuildProp("ro.vendor.product.device", OPTIONS.info_dict)
     density = GetBuildProp("ro.sf.lcd_density", OPTIONS.info_dict)
-    kernel = ("/home/matt/ROMs/DU/out/target/product/dumpling/obj/KERNEL_OBJ/include/config/kernel.release")
-    kernelver = open(kernel).read(
+    # Only works for dumpling
+    kernel = ("$HOME/Github/DU/out/target/product/dumpling/obj/KERNEL_OBJ/include/config/kernel.release")
+    kernelver = open(kernel).read()
     script.Print(" =============================================");
     script.Print(" ROM Version    : %s"%(buildid));
     script.Print(" Kernel Version : %s"%(kernelver)); 
