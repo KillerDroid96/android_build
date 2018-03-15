@@ -475,16 +475,16 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   # Dump fingerprints
   # script.Print("Target: %s" % target_fp)
   script.Print("                                           ");
-  script.Print("             ____  _      __               ");
-  script.Print("            / __ \(_)____/ /___  __        ");
-  script.Print("           / / / / / ___/ __/ / / /        ");
-  script.Print("          / /_/ / / /  / /_/ /_/ /         ");
-  script.Print("         /_____/_/_/   \__/\__, /          ");
-  script.Print("   __  __      _          /____/           ");
-  script.Print("  / / / /___  (_)________  _________  _____");
-  script.Print(" / / / / __ \/ / ___/ __ \/ ___/ __ \/ ___/");
-  script.Print("/ /_/ / / / / / /__/ /_/ / /  / / / (__  ) ");
-  script.Print("\____/_/ /_/_/\___/\____/_/  /_/ /_/____/  ");
+  script.Print("              ____  _      __               ");
+  script.Print("             / __ \(_)____/ /___  __        ");
+  script.Print("            / / / / / ___/ __/ / / /        ");
+  script.Print("           / /_/ / / /  / /_/ /_/ /         ");
+  script.Print("          /_____/_/_/   \__/\__, /          ");
+  script.Print("    __  __      _          /____/           ");
+  script.Print("   / / / /___  (_)________  _________  _____");
+  script.Print("  / / / / __ \/ / ___/ __ \/ ___/ __ \/ ___/");
+  script.Print(" / /_/ / / / / / /__/ /_/ / /  / / / (__  ) ");
+  script.Print(" \____/_/ /_/_/\___/\____/_/  /_/ /_/____/  ");
   script.Print("                                           ");  
   if GetBuildProp("ro.mod.version", OPTIONS.info_dict) is not None:
     buildid = GetBuildProp("ro.mod.version", OPTIONS.info_dict)
@@ -501,21 +501,21 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     # Only works for dumpling
     kernel = ("/home/matt/Github/DU/out/target/product/dumpling/obj/KERNEL_OBJ/include/config/kernel.release")
     kernelver = open(kernel).read()
-    script.Print("=============================================");
+    script.Print(" =============================================");
     script.Print(" ROM Version    : %s"%(buildid));
     script.Print(" Kernel Version : %s"%(kernelver)); 
     script.Print(" OS Version     : %s"%(androidver));
     script.Print(" Security Patch : %s"%(securep));  
     script.Print(" Build Date     : %s"%(buildday));
-    script.Print("=============================================");
+    script.Print(" =============================================");
     script.Print(" Build Type     : %s"%(buildtype));    
     script.Print(" Build Host     : %s"%(buildhst));     
     script.Print(" Maintainer     : %s"%(maintainer));   
-    script.Print("=============================================");
+    script.Print(" =============================================");
     script.Print(" Device         : %s"%(device));           
     script.Print(" Codename       : %s"%(codename));       
     script.Print(" LCD Density    : %s"%(density));   
-    script.Print("=============================================");
+    script.Print(" =============================================");
       
   script.AppendExtra("ifelse(is_mounted(\"/system\"), unmount(\"/system\"));")
   device_specific.FullOTA_InstallBegin()
