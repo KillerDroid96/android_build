@@ -2787,7 +2787,7 @@ bacon: otapackage
 	@echo -e ${CL_RED}"                          Build Completed! Now Flash That Shit & ENJOY!                         "${CL_RED}
 	@echo -e ${CL_RED}"                                                                                                "${CL_RED}
 	@echo -e ${CL_RED}"================================================================================================"${CL_RST}
-	@echo -e ${CL_RST}"$(DU_TARGET_PACKAGE)                                                                            "${CL_RST}
+	@echo -e ${CL_RST}"$(DU_TARGET_PACKAGE)"${CL_RST}
 	@echo -e ${CL_RED}"================================================================================================"${CL_RED}
 	@echo -e ${CL_RST}""
 
