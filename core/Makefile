@@ -2774,21 +2774,25 @@ bacon: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(DU_TARGET_PACKAGE)
 	$(hide) $(MD5SUM) $(DU_TARGET_PACKAGE) > $(DU_TARGET_PACKAGE).md5sum
 	@echo "Package complete: $(DU_TARGET_PACKAGE)"
-
+	
 	@echo -e ${CL_RED}""
-	@echo -e ${CL_RED}"================================================================================================"${CL_RED}
-	@echo -e ${CL_RED}"                 ____  _      __           __  __      _                                        "${CL_RED}
-	@echo -e ${CL_RED}"                / __ \(_)____/ /___  __   / / / /___  (_)________  _________  _____             "${CL_RED}
-	@echo -e ${CL_RED}"               / / / / / ___/ __/ / / /  / / / / __ \/ / ___/ __ \/ ___/ __ \/ ___/             "${CL_RED}
-	@echo -e ${CL_RED}"              / /_/ / / /  / /_/ /_/ /  / /_/ / / / / / /__/ /_/ / /  / / / (__  )              "${CL_RED}
-	@echo -e ${CL_RED}"             /_____/_/_/   \__/\__, /   \____/_/ /_/_/\___/\____/_/  /_/ /_/____/               "${CL_RED}
-	@echo -e ${CL_RED}"                              /____/                                                            "${CL_RED}
-	@echo -e ${CL_RST}"                                                                                                "${CL_RST}
-	@echo -e ${CL_RED}"                          Build Completed! Now Flash That Shit & ENJOY!                         "${CL_RED}
-	@echo -e ${CL_RED}"                                                                                                "${CL_RED}
-	@echo -e ${CL_RED}"================================================================================================"${CL_RST}
+	@echo -e ${CL_RED}"============================================="${CL_RED}
+	@echo -e ${CL_RED}"               ____  _      __               "${CL_RST}
+	@echo -e ${CL_RED}"              / __ \(_)____/ /___  __        "${CL_RST}
+	@echo -e ${CL_RED}"             / / / / / ___/ __/ / / /        "${CL_RST}
+	@echo -e ${CL_RED}"            / /_/ / / /  / /_/ /_/ /         "${CL_RST}
+	@echo -e ${CL_RED}"           /_____/_/_/   \__/\__, /          "${CL_RST}
+	@echo -e ${CL_RED}"    __  __      _            /____/          "${CL_RST}
+	@echo -e ${CL_RED}"   / / / /___  (_)________  _________  _____ "${CL_RST}
+	@echo -e ${CL_RED}"  / / / / __ \/ / ___/ __ \/ ___/ __ \/ ___/ "${CL_RST}
+	@echo -e ${CL_RED}" / /_/ / / / / / /__/ /_/ / /  / / / (__  )  "${CL_RST}
+	@echo -e ${CL_RED}" \____/_/ /_/_/\___/\____/_/  /_/ /_/____/   "${CL_RST}
+	@echo -e ${CL_RED}"                                             "${CL_RST}
+	@echo -e ${CL_RST}"Build Completed! Now Flash That Shit & ENJOY!"${CL_RST}
+	@echo -e ${CL_RED}"                                             "${CL_RED}
+	@echo -e ${CL_RED}"============================================="${CL_RED}
 	@echo -e ${CL_RST}"$(DU_TARGET_PACKAGE)"${CL_RST}
-	@echo -e ${CL_RED}"================================================================================================"${CL_RED}
+	@echo -e ${CL_RED}"============================================="${CL_RED}
 	@echo -e ${CL_RST}""
 
 endif    # build_ota_package
