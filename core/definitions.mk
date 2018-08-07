@@ -1846,7 +1846,7 @@ if $(PRIVATE_STRIP) --strip-all -R .comment $< -o $@; then \
   $(PRIVATE_OBJCOPY) -S --remove-section .gdb_index --remove-section .comment --keep-symbols=$@.keep_symbols $@.mini_debuginfo && \
   $(PRIVATE_OBJCOPY) --rename-section saved_debug_frame=.debug_frame $@.mini_debuginfo && \
   rm -f $@.mini_debuginfo.xz && \
-  xz $@.mini_debuginfo && \
+  $(XZ) $@.mini_debuginfo && \
   $(PRIVATE_OBJCOPY) --add-section .gnu_debugdata=$@.mini_debuginfo.xz $@; \
 else \
   cp -f $< $@; \
@@ -1875,8 +1875,14 @@ endef
 ## Commands for running gcc to link an executable
 ###########################################################
 
+ifeq ($(TARGET_DISABLE_ARM_PIE),true)
+   PIE_EXECUTABLE_TRANSFORM :=
+else
+   PIE_EXECUTABLE_TRANSFORM := -pie
+endif
+
 define transform-o-to-executable-inner
-$(hide) $(PRIVATE_CXX) -pie \
+$(hide) $(PRIVATE_CXX) $(PIE_EXECUTABLE_TRANSFORM) \
 	-nostdlib -Bdynamic \
 	-Wl,-dynamic-linker,$(PRIVATE_LINKER) \
 	-Wl,--gc-sections \
@@ -1956,7 +1962,8 @@ endef
 ifdef BUILD_HOST_static
 HOST_FPIE_FLAGS :=
 else
-HOST_FPIE_FLAGS := -pie
+HOST_FPIE_FLAGS := $(PIE_EXECUTABLE_TRANSFORM)
+
 # Force the correct entry point to workaround a bug in binutils that manifests with -pie
 ifeq ($(HOST_CROSS_OS),windows)
 HOST_CROSS_FPIE_FLAGS += -Wl,-e_mainCRTStartup
@@ -2043,6 +2050,8 @@ $(hide) $(AAPT_ASAN_OPTIONS) $(AAPT) package $(PRIVATE_AAPT_FLAGS) -m \
     $(addprefix --rename-manifest-package , $(PRIVATE_MANIFEST_PACKAGE_NAME)) \
     $(addprefix --rename-instrumentation-target-package , $(PRIVATE_MANIFEST_INSTRUMENTATION_FOR)) \
     --skip-symbols-without-default-localization
+# So that we re-run aapt when the list of input files change
+$(hide) echo $(PRIVATE_RESOURCE_LIST) >/dev/null
 endef
 
 # Search for generated R.java/Manifest.java, copy the found R.java as $@.
@@ -2628,6 +2637,8 @@ $(hide) $(AAPT_ASAN_OPTIONS) $(AAPT) package -u $(PRIVATE_AAPT_FLAGS) \
     $(addprefix --rename-instrumentation-target-package , $(PRIVATE_MANIFEST_INSTRUMENTATION_FOR)) \
     --skip-symbols-without-default-localization \
     -F $@
+# So that we re-run aapt when the list of input files change
+$(hide) echo $(PRIVATE_RESOURCE_LIST) >/dev/null
 endef
 
 # We need the extra blank line, so that the command will be on a separate line.
@@ -2743,9 +2754,9 @@ endef
 define uncompress-shared-libs
 $(hide) if (zipinfo $@ $(PRIVATE_EMBEDDED_JNI_LIBS) 2>/dev/null | grep -v ' stor ' >/dev/null) ; then \
   rm -rf $(dir $@)uncompressedlibs && mkdir $(dir $@)uncompressedlibs; \
-  unzip $@ $(PRIVATE_EMBEDDED_JNI_LIBS) -d $(dir $@)uncompressedlibs && \
-  zip -d $@ 'lib/*.so' && \
-  ( cd $(dir $@)uncompressedlibs && find lib -type f | sort | zip -D -X -0 ../$(notdir $@) -@ ) && \
+  unzip -q $@ $(PRIVATE_EMBEDDED_JNI_LIBS) -d $(dir $@)uncompressedlibs && \
+  zip -qd $@ 'lib/*.so' && \
+  ( cd $(dir $@)uncompressedlibs && find lib -type f | sort | zip -qD -X -0 ../$(notdir $@) -@ ) && \
   rm -rf $(dir $@)uncompressedlibs; \
   fi
 endef

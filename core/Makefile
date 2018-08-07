@@ -98,7 +98,8 @@ INSTALLED_DEFAULT_PROP_TARGET := $(TARGET_ROOT_OUT)/default.prop
 endif
 ALL_DEFAULT_INSTALLED_MODULES += $(INSTALLED_DEFAULT_PROP_TARGET)
 FINAL_DEFAULT_PROPERTIES := \
-    $(call collapse-pairs, $(ADDITIONAL_DEFAULT_PROPERTIES))
+    $(call collapse-pairs, $(ADDITIONAL_DEFAULT_PROPERTIES)) \
+    $(call collapse-pairs, $(PRODUCT_SYSTEM_DEFAULT_PROPERTIES))
 ifndef property_overrides_split_enabled
   FINAL_DEFAULT_PROPERTIES += \
       $(call collapse-pairs, $(PRODUCT_DEFAULT_PROPERTY_OVERRIDES))
@@ -1148,14 +1149,6 @@ ifeq (,$(filter true, $(BOARD_USES_FULL_RECOVERY_IMAGE) $(BOARD_USES_RECOVERY_AS
 RECOVERY_RESOURCE_ZIP := $(TARGET_OUT)/etc/recovery-resource.dat
 else
 RECOVERY_RESOURCE_ZIP :=
-endif
-
-ifeq ($(TARGET_PRIVATE_RES_DIRS),)
-  $(info No private recovery resources for TARGET_DEVICE $(TARGET_DEVICE))
-endif
-
-ifeq ($(recovery_fstab),)
-  $(info No recovery.fstab for TARGET_DEVICE $(TARGET_DEVICE))
 endif
 
 INTERNAL_RECOVERYIMAGE_ARGS := \
@@ -2231,7 +2224,7 @@ OTATOOLS_DEPS := \
   external/avb/test/data/testkey_rsa4096.pem \
   $(shell find build/target/product/security -type f -name \*.x509.pem -o -name \*.pk8 -o \
       -name verity_key | sort) \
-  $(shell find device vendor -type f -name \*.pk8 -o -name verifiedboot\* -o \
+  $(shell find device $(wildcard vendor) -type f -name \*.pk8 -o -name verifiedboot\* -o \
       -name \*.x509.pem -o -name oem\*.prop | sort)
 
 OTATOOLS_RELEASETOOLS := \
