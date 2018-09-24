@@ -28,11 +28,15 @@ PRODUCT_PACKAGES := \
     Provision \
     SystemUI \
     SysuiDarkThemeOverlay \
-    DisplayCutoutEmulationDoubleOverlay \
-    DisplayCutoutEmulationCornerOverlay \
-    DisplayCutoutEmulationTallOverlay \
     EasterEgg \
     WallpaperCropper
+
+ifneq ($(TARGET_BUILD_VARIANT),user)
+PRODUCT_PACKAGES := \
+    DisplayCutoutEmulationDoubleOverlay \
+    DisplayCutoutEmulationCornerOverlay \
+    DisplayCutoutEmulationTallOverlay
+endif
 
 PRODUCT_PACKAGES += \
     clatd \
