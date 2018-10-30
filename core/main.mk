@@ -1399,6 +1399,8 @@ rootclean:
   @rm -rf $(OUT_DIR)/target/product/*/root/
   @echo -e ${CL_GRN}"All root components erased"${CL_RST}
 
+# The rules for dataclean and installclean are defined in cleanbuild.mk.
+
 .PHONY: findlsdumps
 findlsdumps: $(FIND_LSDUMPS_FILE)
 
